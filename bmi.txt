@@ -1,0 +1,125 @@
+create table bmilevel_tb(under_weight varchar2(30),normal_weight varchar2(30),over_weight varchar2(30),obses varchar2(30));
+
+Table created.
+
+insert into bmilevel_tb values('below 18.5','between 18.5 and 25','between 25 and 30','above 30');
+
+1 row inserted.
+
+select * from bmilevel_tb;
+
+output:
+
+      UNDER_WEIGHT                   NORMAL_WEIGHT                  OVER_WEIGHT                    OBSES
+    -----------------------  ------------------------------ ------------------------------ ----------------
+      below 18.5                     between 18.5 and 25            between 25 and 30              above 30
+
+
+drop table person_tb;
+
+create table person_tb(id number,name varchar2(30),height_meter number,weight_kg number,age number,gender char);
+
+Table created.
+
+insert into person_tb values(1,'sugan',1.60,84,24,'M');
+
+insert into person_tb values(2,'john',1.85,92,62,'M');
+
+insert into person_tb values(3,'mary',1.65,58,35,'F');
+
+insert into person_tb values(4,'peter',1.78,104,54,'M');
+
+insert into person_tb values(5,'sena',1.94,89,34,'F');
+
+insert into person_tb values(6,'Tim',1.68,97,76,'M');
+
+select * from person_tb;
+
+output:
+
+     ID        NAME         HEIGHT_METER    WEIGHT_KG        AGE    G
+---------- ---------------- ------------   ----------    --------- ---
+    1           sugan             1.6          84            24     M
+    2           john              1.85         92            62     M
+    3           mary              1.65         58            35     F
+    4           peter             1.78        104            54     M
+    5           sena              1.94         89            34     F
+    6           Tim               1.68         97            76     M
+
+
+select name,height_meter,weight_kg,age,gender,round((weight_kg)/(height_meter)) as bmi  from person_tb;
+
+select id, name,height_meter,weight_kg,age,gender,round((weight_kg)/(height_meter*height_meter)) as bmi from person_tb;
+
+output:
+
+     ID        NAME         HEIGHT_METER    WEIGHT_KG        AGE    G   BMI
+---------- ---------------- ------------   ----------    --------- --- -----
+    1           sugan             1.6          84            24     M   33
+    2           john              1.85         92            62     M   27
+    3           mary              1.65         58            35     F   21
+    4           peter             1.78        104            54     M   33
+    5           sena              1.94         89            34     F   24
+    6           Tim               1.68         97            76     M   34
+
+
+select name,height_meter,weight_kg,age,gender,round((weight_kg)/(height_meter*height_meter)) as bmi from person_tb 
+where round((weight_kg)/(height_meter*height_meter)) < 18.5;
+
+output:
+
+no rows selected.
+
+select name,height_meter,weight_kg,age,gender,round((weight_kg)/(height_meter*height_meter)) as bmi from person_tb 
+where round((weight_kg)/(height_meter*height_meter)) between 18.5 and 25;
+
+output:
+
+     ID        NAME         HEIGHT_METER    WEIGHT_KG        AGE    G   BMI
+---------- ---------------- ------------   ----------    --------- --- -----
+    3           mary              1.65         58            35     F   21
+    5           sena              1.94         89            34     F   24
+
+select name,height_meter,weight_kg,age,gender,round((weight_kg)/(height_meter*height_meter)) as bmi from person_tb 
+where round((weight_kg)/(height_meter*height_meter)) between 25 and 30;
+
+output:
+
+     ID        NAME         HEIGHT_METER    WEIGHT_KG        AGE    G   BMI
+---------- ---------------- ------------   ----------    --------- --- -----
+    2           john              1.85         92            62     M   27
+
+select name,height_meter,weight_kg,age,gender,round((weight_kg)/(height_meter*height_meter)) as bmi from person_tb 
+where round((weight_kg)/(height_meter*height_meter)) > 30;
+
+output:
+
+     ID        NAME         HEIGHT_METER    WEIGHT_KG        AGE    G   BMI
+---------- ---------------- ------------   ----------    --------- --- -----
+    1           sugan             1.6          84            24     M   33  
+    4           peter             1.78        104            54     M   33
+    6           Tim               1.68         97            76     M   34
+
+select * from person_tb;
+
+
+
+
+
+
+
+
+
+
+
+
+
+select * from person_tb;
+
+select id, name,height_meter,weight_kg,age,gender,round((weight_kg)/(height_meter*height_meter)) as bmi,round((weight_kg)/(height_meter*height_meter)) from person_tb
+where round((weight_kg)/(height_meter*height_meter)) between 18.5 and 25 and round((weight_kg)/(height_meter*height_meter)) between 25 and 30;
+
+
+
+select name,height_meter,weight_kg,age,gender,round((weight_kg)/(height_meter*height_meter)) as bmi from person_tb 
+where round((weight_kg)/(height_meter*height_meter)) between 18.5 and 25 ;
